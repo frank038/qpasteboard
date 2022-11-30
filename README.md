@@ -1,5 +1,7 @@
 # qpasteboard
 
+Version 0.9 - may still have issues
+
 (Python) Qt5 Clipboard.
 
 Free to use and modify.
@@ -16,4 +18,6 @@ All clipboards are stored in text files, that can be modified with a text editor
 
 To execute this program from the terminal: ./qpasteboard.sh or python3 qpasteboard.py
 
-![My image](https://github.com/frank038/gpasteboard/blob/master/Screen1.png)
+![My image](https://github.com/frank038/qpasteboard/blob/main/screenshot1.png)
+
+[My image](https://github.com/frank038/qpasteboard/blob/main/screenshot2.png)
