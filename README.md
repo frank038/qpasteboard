@@ -20,4 +20,4 @@ To execute this program from the terminal: ./qpasteboard.sh or python3 qpasteboa
 
 ![My image](https://github.com/frank038/qpasteboard/blob/main/screenshot1.png)
 
-[My image](https://github.com/frank038/qpasteboard/blob/main/screenshot2.png)
+![My image](https://github.com/frank038/qpasteboard/blob/main/screenshot2.png)
