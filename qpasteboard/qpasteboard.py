@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# V. 0.9
+# V. 0.9.1
 
 from cfg import *
 import os
@@ -156,6 +156,10 @@ class Qclip:
         self.tray.activated.connect(self.mainWidget)
         # the first clip stored
         self.actual_clip = None
+        # load the first entry
+        if CLIPS_DICT:
+            list_items = sorted(CLIPS_DICT, reverse=True)
+            self.actual_clip = CLIPS_DICT[list_items[0]][0]
         #
         self.item_text_num = 0
         self.item_image_num = 0
@@ -172,6 +176,7 @@ class Qclip:
                 text = self.app.clipboard().text()
                 # skip if too large
                 if len(text) > CLIP_MAX_SIZE:
+                    self.tray.showMessage("Info", "Text too large.")
                     return
                 #
                 if text and text != self.actual_clip:
@@ -189,6 +194,7 @@ class Qclip:
                         ff = open(os.path.join(clips_path, idx), "w")
                         ff.write(text)
                         ff.close()
+                        self.actual_clip = text
                     except Exception as E:
                         MyDialog("Error", str(E), None)
                         return
@@ -231,6 +237,7 @@ class Qclip:
                         image.save(os.path.join(images_path, idx), IMAGE_FORMAT)
                     except Exception as E:
                         MyDialog("Error", str(E), None)
+                        
         
     def stoptracking(self, action):
         if self.stop_tracking:
@@ -341,6 +348,7 @@ class Qclip:
                     save_btn.setIcon(QIcon("icons/save.png"))
                     save_btn.setToolTip("Save this image")
                     save_btn.clicked.connect(self.on_save_image)
+                    # save_btn.idx = image_temp
                     btn_layout.addWidget(save_btn)
                     #
                     delete_btn = QPushButton()
