@@ -1,6 +1,6 @@
 # qpasteboard
 
-Version 0.9 - may still have issues
+Version 0.9.1
 
 (Python) Qt5 Clipboard.
 
