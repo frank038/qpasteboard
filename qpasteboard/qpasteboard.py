@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# V. 0.9.1
+# V. 0.9.2
 
 from cfg import *
 import os
@@ -348,7 +348,6 @@ class Qclip:
                     save_btn.setIcon(QIcon("icons/save.png"))
                     save_btn.setToolTip("Save this image")
                     save_btn.clicked.connect(self.on_save_image)
-                    # save_btn.idx = image_temp
                     btn_layout.addWidget(save_btn)
                     #
                     delete_btn = QPushButton()
@@ -540,10 +539,12 @@ class Qclip:
     def on_delete_item(self, idx):
         num_items = self.textLW.count()
         itemW = None
+        _item_num = None
         #
         for i in range(num_items):
             if self.textLW.item(i).idx == idx:
                 itemW = self.textLW.item(i)
+                _item_num = i
                 break
         if itemW:
             # remove the file
@@ -559,6 +560,9 @@ class Qclip:
             #
             self.item_text_num -= 1
             self.on_label_text(self.historyLBL, self.item_text_num, "in history")
+            #
+            if _item_num == 0:
+                self.actual_clip = CLIPS_DICT[self.textLW.item(0).idx][0]
     
     def on_clear_history(self):
         ret = MyDialog("Question", "Remove all the items?", self.cwindow)
@@ -568,6 +572,7 @@ class Qclip:
                 clips_temp = os.listdir(clips_path)
                 if clips_temp:
                     for iitem in clips_temp:
+                        print("553::", iitem)
                         os.remove(os.path.join(clips_path, iitem))
                         del CLIPS_DICT[iitem]
             except Exception as E:
@@ -582,6 +587,7 @@ class Qclip:
                 MyDialog("Error", str(E), self.cwindow)
             #
             self.textLW.clear()
+            self.actual_clip = None
             #
             self.cwindow.close()
     
