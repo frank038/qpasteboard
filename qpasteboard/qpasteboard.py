@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# V. 0.9.2
+# V. 0.9.3
 
 from cfg import *
 import os
@@ -572,9 +572,10 @@ class Qclip:
                 clips_temp = os.listdir(clips_path)
                 if clips_temp:
                     for iitem in clips_temp:
-                        print("553::", iitem)
                         os.remove(os.path.join(clips_path, iitem))
                         del CLIPS_DICT[iitem]
+                #
+                self.textLW.clear()
             except Exception as E:
                 MyDialog("Error", str(E), self.cwindow)
             try:
